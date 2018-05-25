@@ -6,7 +6,7 @@
 if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
-
+set path +=~/dotfiles/.vimrc
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "html,javascript,python"
@@ -84,7 +84,6 @@ Plug 'honza/vim-snippets'
 
 "" Color
 
-
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -99,9 +98,8 @@ Plug 'mattn/emmet-vim'
 
 " javascript
 "" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
-
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
@@ -180,7 +178,6 @@ set ruler
 set number
 
 let no_buffers_menu=1
-colorscheme afterglow
 
 set mousemodel=popup
 set t_Co=256
@@ -217,6 +214,8 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+"Color
+colorscheme jellybeans
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
