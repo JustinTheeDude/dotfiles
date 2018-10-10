@@ -53,6 +53,17 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
+Plug 'prettier/vim-prettier'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
+Plug 'powerline/powerline'
+Plug 'trusktr/seti.vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" vim-airline
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -87,7 +98,9 @@ Plug 'honza/vim-snippets'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
-
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
 " html
 "" HTML Bundle
 Plug 'hail2u/vim-css3-syntax'
@@ -107,7 +120,9 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 
 "*****************************************************************************
+" Remove White Space on save
 "*****************************************************************************
+autocmd BufWritePre * :%s/\s\+$//e
 
 "" Include user's extra bundle
 if filereadable(expand("~/.vimrc.local.bundles"))
@@ -198,7 +213,7 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
+
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
   else
@@ -206,7 +221,7 @@ else
       set term=xterm-256color
     endif
   endif
-  
+
 endif
 
 
@@ -215,7 +230,15 @@ if &term =~ '256color'
 endif
 
 "Color
-colorscheme jellybeans
+colorscheme PaperColor
+
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_termcolors = '256'
+let g:webdevicons_enable_nerdtree = 1
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -230,7 +253,6 @@ set modelines=10
 
 set title
 set titleold="Terminal"
-set titlestring=%F
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
@@ -243,13 +265,6 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_skip_empty_sections = 1
 
 "*****************************************************************************
 "" Abbreviations
@@ -273,7 +288,7 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 30
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
@@ -508,7 +523,8 @@ let g:jedi#smart_auto_mappings = 0
 let g:syntastic_python_checkers=['python', 'flake8']
 
 " vim-airline
-let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='minimalist'
 
 " Syntax highlight
 " Default highlight is better than polyglot
