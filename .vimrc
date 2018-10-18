@@ -58,7 +58,6 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
-Plug 'ryanoasis/vim-devicons'
 Plug 'powerline/powerline'
 Plug 'trusktr/seti.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -101,6 +100,9 @@ Plug 'honza/vim-snippets'
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
 " html
 "" HTML Bundle
 Plug 'hail2u/vim-css3-syntax'
@@ -186,6 +188,11 @@ let g:session_autosave = "no"
 let g:session_command_aliases = 1
 
 "*****************************************************************************
+"" Fold Settings
+"*****************************************************************************
+noremap <Leader>f :<C-u> set foldmethod=indent
+
+"*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
 syntax on
@@ -230,7 +237,7 @@ if &term =~ '256color'
 endif
 
 "Color
-colorscheme PaperColor
+colorscheme dracula
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_termcolors = '256'
