@@ -61,6 +61,9 @@ Plug 'morhetz/gruvbox'
 Plug 'powerline/powerline'
 Plug 'trusktr/seti.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'arcticicestudio/nord-vim'
+Plug 'trevordmiller/nova-vim'
+Plug 'zanglg/nova.vim'
 
 " vim-airline
 if isdirectory('/usr/local/opt/fzf')
@@ -115,8 +118,12 @@ Plug 'mattn/emmet-vim'
 "" Javascript Bundle
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+
+let g:jsx_ext_required = 1
+
 " python
 "" Python Bundle
+Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 
 
@@ -236,15 +243,18 @@ if &term =~ '256color'
 endif
 
 "Color
-colorscheme dracula
+set termguicolors
+let g:nord_comment_brightness = 20
+let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
+let g:nord_italic_comments = 1
+colorscheme nord
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_termcolors = '256'
-let g:webdevicons_enable_nerdtree = 1
-" after a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
-    call webdevicons#refresh()
-endif
+
+
+" after a re-source, fix syntax m:set termguicolorsatching issues (concealing brackets):
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
