@@ -63,7 +63,15 @@ Plug 'trusktr/seti.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'arcticicestudio/nord-vim'
 Plug 'trevordmiller/nova-vim'
-Plug 'zanglg/nova.vim'
+Plug 'zeis/vim-kolor'
+Plug 'ErichDonGubler/vim-sublime-monokai'
+Plug 'srcery-colors/srcery-vim'
+Plug 'cseelus/vim-colors-tone'
+Plug 'rakr/vim-one'
+Plug 'jacoborus/tender.vim'
+Plug 'sonph/onehalf'
+Plug 'altercation/vim-colors-solarized'
+Plug 'joshdick/onedark.vim'
 
 " vim-airline
 if isdirectory('/usr/local/opt/fzf')
@@ -243,12 +251,16 @@ if &term =~ '256color'
 endif
 
 "Color
-set termguicolors
+syntax enable
+set background=dark
 let g:nord_comment_brightness = 20
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
 let g:nord_italic_comments = 1
-colorscheme nord
+let g:solarized_termcolors=256
+let g:onedark_termcolors=256
+colorscheme tender
+
 
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_termcolors = '256'
@@ -309,11 +321,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
 
 " vimshell.vim
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
