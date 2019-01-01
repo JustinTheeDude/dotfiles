@@ -12,7 +12,6 @@ Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
 
 ""HTML/Frontend Plugins
 Plug 'hail2u/vim-css3-syntax'
@@ -84,7 +83,6 @@ let no_buffers_menu=1
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
-set gfn=Monospace\ 10
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -166,4 +164,3 @@ nnoremap <silent> <leader><space> :noh<cr>
 "*****************************************************************************
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='minimalist'
-

@@ -84,7 +84,7 @@ function parse_git_branch() {
 
 # Change this symbol to something sweet.
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
-symbol="☄  "
+symbol="(☞ﾟヮﾟ)☞  "
 
 export PS1="\[${MAGENTA}\]\u \[$RESET\]in \[$GREEN\]\w\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$RESET\]\n$symbol\[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
@@ -94,7 +94,3 @@ export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 # Only show the current directory's name in the tab
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
-
-# init z! (https://github.com/rupa/z)
-. ~/z.sh
-
