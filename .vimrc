@@ -13,7 +13,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'xolox/vim-misc'
 
-""HTML/Frontend Plugins
+""HTML || CSS/Frontend Plugins
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'mattn/emmet-vim'
