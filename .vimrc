@@ -6,25 +6,27 @@ call plug#begin(expand('~/.vim/plugged'))
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'xolox/vim-misc'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 ""HTML || CSS/Frontend Plugins
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'mattn/emmet-vim'
+Plug 'groenewege/vim-less'
 
 ""Javascript Plugins
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
-""Vim Plug PlugEnd
-call plug#end()
+"" Autocomplete brackets
+Plug 'jiangmiao/auto-pairs'
 
+call plug#end()
 "*****************************************************************************
 "" Leader Key
 "*****************************************************************************
@@ -34,6 +36,15 @@ let mapleader=','
 " Remove White Space on save
 "*****************************************************************************
 autocmd BufWritePre * :%s/\s\+$//e
+
+"*****************************************************************************
+" Fold Settings
+"*****************************************************************************
+" set foldmethod=syntax
+" set foldlevelstart=99
+" set foldnestmax=10
+" set nofoldenable
+" set foldlevel=1
 
 "*****************************************************************************
 " Tab Settings
@@ -93,6 +104,18 @@ set background=dark
 set termguicolors
 colorscheme dracula
 
+""Set backspace at all times
+set backspace=indent,eol,start
+
+""Autoindent dem lines
+set autoindent
+
+""Show matching braces
+set showmatch
+
+""Set terminal title
+set title
+
 "*****************************************************************************
 "" NERDTree configuration
 "*****************************************************************************
@@ -106,6 +129,13 @@ let g:NERDTreeWinSize = 30
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+
+"*****************************************************************************
+"" Save/Q shortcut
+"*****************************************************************************
+nmap <leader>w :w <CR>
+nmap <leader>q :q <CR>
+nmap <leader>e :wq <CR>
 
 "*****************************************************************************
 "" Autocmd Rules
@@ -142,6 +172,8 @@ set autoread
 "*****************************************************************************
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
+set splitbelow
+set splitright
 
 "*****************************************************************************
 "" Syntastic Settings
@@ -160,7 +192,18 @@ let g:syntastic_aggregate_errors = 1
 nnoremap <silent> <leader><space> :noh<cr>
 
 "*****************************************************************************
-" vim-airlin
+""Lightline Settings
 "*****************************************************************************
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='minimalist'
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
+set laststatus=2
+
+"*****************************************************************************
+""Switch between vim windows
+"*****************************************************************************
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
