@@ -6,6 +6,10 @@ source ~/.git-completion.bash
 # Open specified files in Sublime Text
 # "s ." will open the current directory in Sublime
 
+
+#use nvim as vim
+alias vim="nvim"
+
 # Color LS
 colorflag="-G"
 alias ls="command ls ${colorflag}"
