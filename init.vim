@@ -7,11 +7,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'xolox/vim-misc'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
 
 ""HTML || CSS/Frontend Plugins
 Plug 'hail2u/vim-css3-syntax'
@@ -20,16 +20,19 @@ Plug 'mattn/emmet-vim'
 Plug 'groenewege/vim-less'
 
 ""Javascript Plugins
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-
-"" Autocomplete brackets
-Plug 'jiangmiao/auto-pairs'
+Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
 
 "Ayu Theme
 Plug 'drewtempelmeyer/palenight.vim'
 
+"Linting
+Plug 'w0rp/ale'
+
+""Show line indents
+Plug 'Yggdroot/indentLine'
+
 call plug#end()
+
 "*****************************************************************************
 "" Leader Key
 "*****************************************************************************
@@ -48,6 +51,34 @@ autocmd BufWritePre * :%s/\s\+$//e
 " set foldnestmax=10
 " set nofoldenable
 " set foldlevel=1
+
+"*****************************************************************************
+" Ale Settings
+"*****************************************************************************
+let g:ale_set_highlights = 0
+let g:ale_change_sign_column_color = 0
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_echo_msg_error_str = '✖'
+let g:ale_echo_msg_warning_str = '⚠'
+let g:ale_echo_msg_format = '%severity% %s% [%linter%% code%]'
+let g:ale_completion_enabled = 1
+
+let g:ale_linters = {
+			\   'javascript': ['eslint', 'tsserver'],
+			\   'typescript': ['tsserver', 'tslint'],
+			\   'typescript.tsx': ['tsserver', 'tslint'],
+			\   'html': []
+			\}
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['typescript'] = ['prettier', 'tslint']
+let g:ale_fixers['json'] = ['prettier']
+let g:ale_fixers['css'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 0
+nmap <silent><leader>af :ALEFix<cr>
 
 "*****************************************************************************
 " Tab Settings
@@ -102,13 +133,19 @@ set guioptions=egmrti
 set gcr=a:blinkon0
 set scrolloff=3
 
+""Auto Complete Brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O}}}])'"
+
 ""Colors
 set background=dark
+set termguicolors
 colorscheme palenight
-
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 let g:palenight_terminal_italics = 1
 
@@ -124,6 +161,11 @@ set showmatch
 ""Set terminal title
 set title
 
+""Show indented lines
+set listchars=tab:▸\ ,eol:¬
+
+set noshowcmd
+
 "*****************************************************************************
 "" NERDTree configuration
 "*****************************************************************************
@@ -133,7 +175,7 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize = 10
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
@@ -205,7 +247,7 @@ nnoremap <silent> <leader><space> :noh<cr>
 set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'palenight',
-      \ }
+    \ }
 set laststatus=2
 
 "*****************************************************************************
