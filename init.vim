@@ -8,10 +8,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'xolox/vim-misc'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
 
 ""HTML || CSS/Frontend Plugins
 Plug 'hail2u/vim-css3-syntax'
@@ -22,14 +20,20 @@ Plug 'groenewege/vim-less'
 ""Javascript Plugins
 Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
 
-"Ayu Theme
+"Themes
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+"Go Lang Plugins
+Plug 'fatih/vim-go'
 
 "Linting
 Plug 'w0rp/ale'
 
 ""Show line indents
 Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 
@@ -145,8 +149,9 @@ inoremap {;<CR> {<CR>};<ESC>O}}}])'"
 ""Colors
 set background=dark
 set termguicolors
-colorscheme palenight
+colorscheme dracula
 
+""Palenight Settings
 let g:palenight_terminal_italics = 1
 
 ""Set backspace at all times
@@ -162,7 +167,8 @@ set showmatch
 set title
 
 ""Show indented lines
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set list
 
 set noshowcmd
 
@@ -175,7 +181,7 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 10
+let g:NERDTreeWinSize = 25
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
