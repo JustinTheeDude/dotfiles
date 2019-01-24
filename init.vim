@@ -31,10 +31,6 @@ Plug 'fatih/vim-go'
 "Linting
 Plug 'w0rp/ale'
 
-""Show line indents
-Plug 'Yggdroot/indentLine'
-Plug 'nathanaelkane/vim-indent-guides'
-
 call plug#end()
 
 "*****************************************************************************
@@ -167,7 +163,7 @@ set showmatch
 set title
 
 ""Show indented lines
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set list
 
 set noshowcmd
