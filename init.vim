@@ -12,10 +12,10 @@ Plug 'xolox/vim-misc'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 ""HTML || CSS/Frontend Plugins
-Plug 'hail2u/vim-css3-syntax'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'mattn/emmet-vim'
-Plug 'groenewege/vim-less'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'gorodinskiy/vim-coloresque'
+" Plug 'mattn/emmet-vim'
+" Plug 'groenewege/vim-less'
 
 ""Javascript Plugins
 Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
