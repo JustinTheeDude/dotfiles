@@ -1,3 +1,24 @@
+"*****************************************************************************
+"       (`-.           _   .-')    _  .-')                  .-. .-')
+"     _(OO  )_        ( '.( OO )_ ( \( -O )                 \  ( OO )
+" ,--(_/   ,. \ ,-.-') ,--.   ,--.),------.   .-----.        ;-----.\  ,--.   ,--.
+" \   \   /(__/ |  |OO)|   `.'   | |   /`. ' '  .--./        | .-.  |   \  `.'  /
+"  \   \ /   /  |  |  \|         | |  /  | | |  |('-.        | '-' /_).-')     /
+"   \   '   /,  |  |(_/|  |'.'|  | |  |_.' |/_) |OO  )       | .-. `.(OO  \   /
+"    \     /__),|  |_.'|  |   |  | |  .  '.'||  |`-'|        | |  \  ||   /  /\_
+"     \   /   (_|  |   |  |   |  | |  |\  \(_'  '--'\        | '--'  /`-./  /.__)
+"      `-'      `--'   `--'   `--' `--' '--'  `-----'        `------'   `--'
+"                         .-')    .-') _               .-') _        .-') _     ('-.        (`-.      ('-.    .-')
+"                        ( OO ). (  OO) )             ( OO ) )      (  OO) )  _(  OO)     _(OO  )_  _(  OO)  ( OO ).
+"      ,--. ,--. ,--.   (_)---\_)/     '._ ,-.-') ,--./ ,--,'       /     '._(,------.,--(_/   ,. \(,------.(_)---\_)
+"  .-')| ,| |  | |  |   /    _ | |'--...__)|  |OO)|   \ |  |\       |'--...__)|  .---'\   \   /(__/ |  .---'/    _ |
+" ( OO |(_| |  | | .-') \  :` `. '--.  .--'|  |  \|    \|  | )      '--.  .--'|  |     \   \ /   /  |  |    \  :` `.
+" | `-'|  | |  |_|( OO ) '..`''.)   |  |   |  |(_/|  .     |/          |  |  (|  '--.   \   '   /, (|  '--.  '..`''.)
+" ,--. |  | |  | | `-' /.-._)   \   |  |  ,|  |_.'|  |\    |           |  |   |  .--'    \     /__) |  .--' .-._)   \
+" |  '-'  /('  '-'(_.-' \       /   |  | (_|  |   |  | \   |           |  |   |  `---.    \   /     |  `---.\       /
+"  `-----'   `-----'     `-----'    `--'   `--'   `--'  `--'           `--'   `------'     `-'      `------' `-----'
+"*****************************************************************************
+
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
 "*****************************************************************************
@@ -12,24 +33,32 @@ Plug 'xolox/vim-misc'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 ""HTML || CSS/Frontend Plugins
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'gorodinskiy/vim-coloresque'
-" Plug 'mattn/emmet-vim'
-" Plug 'groenewege/vim-less'
-
-""Javascript Plugins
-Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'mattn/emmet-vim'
+Plug 'groenewege/vim-less'
+Plug 'cakebaker/scss-syntax.vim'
 
 "Themes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'altercation/vim-colors-solarized'
+Plug 'sonph/onehalf'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'sickill/vim-monokai'
+Plug 'joshdick/onedark.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'KeitaNakamura/neodark.vim'
 
 "Go Lang Plugins
 Plug 'fatih/vim-go'
 
 "Linting
 Plug 'w0rp/ale'
+
+"Lightline
+Plug 'itchyny/vim-gitbranch'
 
 call plug#end()
 
@@ -42,15 +71,6 @@ let mapleader=','
 " Remove White Space on save
 "*****************************************************************************
 autocmd BufWritePre * :%s/\s\+$//e
-
-"*****************************************************************************
-" Fold Settings
-"*****************************************************************************
-" set foldmethod=syntax
-" set foldlevelstart=99
-" set foldnestmax=10
-" set nofoldenable
-" set foldlevel=1
 
 "*****************************************************************************
 " Ale Settings
@@ -81,14 +101,6 @@ let g:ale_fix_on_save = 0
 nmap <silent><leader>af :ALEFix<cr>
 
 "*****************************************************************************
-" Tab Settings
-"*****************************************************************************
-set tabstop=4
-set softtabstop=0
-set shiftwidth=4
-set expandtab
-
-"*****************************************************************************
 "" Search Settings
 "*****************************************************************************
 set hlsearch
@@ -114,7 +126,7 @@ set relativenumber
 "*****************************************************************************
 "" Fold Settings
 "*****************************************************************************
-noremap <Leader>f :<C-u> set foldmethod=indent
+noremap <Leader>f :<C-u> set foldmethod=indent <CR>
 
 "*****************************************************************************
 "" Visual Settings
@@ -126,7 +138,6 @@ set number
 let no_buffers_menu=1
 
 set mousemodel=popup
-set t_Co=256
 set guioptions=egmrti
 
 "" Disable the blinking cursor.
@@ -145,7 +156,10 @@ inoremap {;<CR> {<CR>};<ESC>O}}}])'"
 ""Colors
 set background=dark
 set termguicolors
-colorscheme dracula
+colorscheme tender
+let g:onedark_termcolors=256
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 ""Palenight Settings
 let g:palenight_terminal_italics = 1
@@ -162,15 +176,11 @@ set showmatch
 ""Set terminal title
 set title
 
-""Show indented lines
-set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-set list
-
 set noshowcmd
 
 "*****************************************************************************
 "" NERDTree configuration
-"*****************************************************************************
+"****************************************************************************
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -210,13 +220,6 @@ augroup vimrc-wrapping
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-"" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
-
 set autoread
 
 "*****************************************************************************
@@ -248,7 +251,14 @@ nnoremap <silent> <leader><space> :noh<cr>
 "*****************************************************************************
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
     \ }
 set laststatus=2
 
@@ -259,3 +269,47 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
+
+nmap gf :BrianOpenFile<CR>
+
+"*****************************************************************************
+"Set Path
+"*****************************************************************************
+set path+=/Users/justin/aptstwofoseven/247/247/templates_frontend,
+
+command! BrianOpenFile call BrianOpenFile()
+function! BrianOpenFile()
+    try
+    let g:BrianOpenFileName = matchstr(expand("<cfile>"), ".*")
+    "echo g:BrianOpenFileName
+    execute ':find ' . g:BrianOpenFileName
+    catch /.*/
+        try
+        let g:BrianOpenFileName = expand("<cfile>") . ".js"
+        "echo g:BrianOpenFileName
+        execute ':find ' . g:BrianOpenFileName
+        catch /.*/
+            try
+            let g:BrianOpenFileName = tr(expand("<cfile>"), ".", "/") . ".py"
+            execute ':find ' . g:BrianOpenFileName
+            catch /.*/
+                try
+                let g:BrianOpenFileName = matchstr(expand("<cfile>"), "[^/].*")
+                execute ':find ' . g:BrianOpenFileName
+                catch /.*/
+                endtry
+            endtry
+        endtry
+    endtry
+endfunction
+
+"*****************************************************************************
+" Tab Settings
+"*****************************************************************************
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set softtabstop=0
+set expandtab
+
+highlight clear SignColumn
