@@ -1,64 +1,124 @@
-" Required:
 call plug#begin(expand('~/.vim/plugged'))
 "*****************************************************************************
 """ Vim Plugs
 "*****************************************************************************
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'sainnhe/lightline_foobar.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'xolox/vim-misc'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-sensible'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-fugitive'
 
 "HTML || CSS/Frontend Plugins
-Plug 'hail2u/vim-css3-syntax'
 Plug 'mattn/emmet-vim'
-Plug 'groenewege/vim-less'
-Plug 'ap/vim-css-color'
 Plug 'lepture/vim-jinja'
+
+""Autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "" Match Tags
 Plug 'gregsexton/MatchTag'
 Plug 'sharkdp/bat'
 
 "Themes
-Plug 'relastle/bluewery.vim'
-Plug 'davidosomething/vim-colors-meh'
-Plug 'fatih/molokai'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'jacoborus/tender.vim'
+Plug 'sjl/badwolf'
 
 "Vim Surround
 Plug 'tpope/vim-surround'
 
 ""Linting
 Plug 'w0rp/ale'
-Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 
-Plug 'airblade/vim-gitgutter' "Auto complete brackets
-Plug 'jiangmiao/auto-pairs'
-Plug 'itchyny/vim-gitbranch'
+Plug 'ruanyl/vim-gh-line'
+Plug 'srstevenson/vim-picker'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+"all da sets
+syntax on
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set splitbelow
+set splitright
+set nohlsearch
+set incsearch
+set smartcase
+set ignorecase
+set encoding=utf-8
+set fileencodings=utf-8
+set noswapfile
+set hidden
+set relativenumber
+set number
+set cursorline
+set lazyredraw
+set si
+set autoindent
+set showmatch
+set scrolloff=5
+set colorcolumn=80
+set nowrap
+
 "*****************************************************************************
-""" fzf
+"" new file
 "*****************************************************************************
-command! -bang Buffer
-  \ call fzf#vim#buffers({'down': '20%', 'options': '--reverse --margin 15%,0'}, <bang>0)
-nmap <Leader>o :Buffer <cr>
+
+
+"*****************************************************************************
+"" brackets
+"*****************************************************************************
+inoremap ( ()<Esc>i
+inoremap { {}<Esc>i
+inoremap {<CR> {<CR>}<Esc>O
+inoremap [ []<Esc>i
+inoremap < <><Esc>i
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
+
+"*****************************************************************************
+"" surround in function
+"*****************************************************************************
+nmap <Leader>r ysawf
+
+"*****************************************************************************
 
 "*****************************************************************************
 "" Leader Key
 "*****************************************************************************
 let mapleader=','
 
+"*****************************************************************************
+"" COC
+"*****************************************************************************
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+"*****************************************************************************
 " Remove White Space on save
 "*****************************************************************************
 autocmd BufWritePre * :%s/\s\+$//e
@@ -82,7 +142,6 @@ let g:ale_linters = {
 \   'vim': ['vint']
 \}
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'css': ['prettier'],
 \   'scss': ['prettier', 'stylelint'],
@@ -90,37 +149,6 @@ let g:ale_fixers = {
 
 let g:ale_fix_on_save = 1
 nmap <silent><leader>af :ALEFix<cr>
-
-"*****************************************************************************
-"" CSSComb
-"*****************************************************************************
-autocmd FileType scss,css nnoremap <buffer> <leader>c :call CSScomb()<CR>
-function! CSScomb()
-  execute "silent !csscomb " . expand('%')
-  redraw!
-endfunction
-
-"*****************************************************************************
-"" Search Settings
-"*****************************************************************************
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-"*****************************************************************************
-"" Encoding
-"*****************************************************************************
-set encoding=utf-8
-set fileencodings=utf-8
-set binary
-set nobomb
-set ttyfast
-
-"*****************************************************************************
-"" Set Relative Numbers
-"*****************************************************************************
-set relativenumber
 
 "*****************************************************************************
 "" Fold Settings
@@ -135,9 +163,6 @@ let g:indentLine_enabled = 1
 "*****************************************************************************
 "" Visual Settings
 "*****************************************************************************
-syntax enable
-set number
-set cursorline
 
 let no_buffers_menu=1
 
@@ -146,51 +171,19 @@ set guioptions=egmrti
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
-set scrolloff=3
 
 ""Colors
-let base16colorspace=256
 set termguicolors
-colorscheme gruvbox
+colorscheme badwolf
 
 ""Set backspace at all times
 set backspace=indent,eol,start
 
-""Autoindent dem lines
-set autoindent
-
-""Show matching braces
-set showmatch
-
-""Set terminal title
-set title
-
-"Show indented lines
- set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
- set list
+set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set list
 
 set noshowcmd
 
-"*****************************************************************************
-" Gruvbox
-"*****************************************************************************
-let g:gruvbox_italic = 0
-let g:gruvbox_termcolors = 256
-let g:gruvbox_contrast_dark = 'soft'
-
-"*****************************************************************************
-"" NERDTree configuration
-"*****************************************************************************
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 40
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 
 "*****************************************************************************
 "" Save/Q shortcut
@@ -204,8 +197,6 @@ nmap <leader>wq :wq <CR>
 "*****************************************************************************
 noremap <Leader>h :<C-u>split<CR>
 noremap <Leader>v :<C-u>vsplit<CR>
-set splitbelow
-set splitright
 
 "*****************************************************************************
 ""Clean Search History
@@ -215,28 +206,72 @@ nnoremap <silent> <leader><space> :noh<cr>
 "*****************************************************************************
 ""Lightline Settings
 "*****************************************************************************
-set laststatus=2
+if !exists('*fugitive#statusline')
+  set statusline=%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}[L%l/%L,C%03v]
+  set statusline+=%=
+  set statusline+=%{fugitive#statusline()}
+endif
+
 let g:lightline = {
-    \'colorscheme': 'gruvbox',
-    \ 'active': {
-    \'left': [ [ 'mode', 'paste' ],
-    \ [ 'gitbranch', 'readonly', 'filename', 'modified' ]]
-    \},
-    \ 'component_function': {
-    \   'filetype': 'MyFiletype',
-    \   'fileformat': 'MyFileformat',
-    \ }
-    \ }
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'filename', 'modified' ]
+      \           ],
+      \   'right': [
+      \     ['ale', 'fugitive'],
+      \     ['lineinfo'],
+      \     ['percent'],
+      \     ['charcode', 'fileformat', 'filetype'],
+      \   ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'filename': '%f'
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'readonly': 'MyReadonly',
+      \   'modified': 'MyModified',
+      \   'ale': 'ALEGetStatusLine'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
 
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+function! MyModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
 endfunction
 
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+function! MyReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "\u2b64"
+  else
+    return ""
+  endif
 endfunction
 
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ' '._ : ''
+  endif
+  return ''
+endfunction
+
+set noshowmode
 "*****************************************************************************
 ""Switch between vim windows
 "*****************************************************************************
@@ -246,53 +281,7 @@ noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
 "*****************************************************************************
-" FZF
-"*****************************************************************************
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-
-command! -bang -nargs=* Rg
-            \ call fzf#vim#grep(
-            \ 'rg
-            \ --column
-            \ --glob "*.{py,html}"
-            \ --glob "!{.git,node_modules,.min.js}/*"
-            \ --hidden
-            \ --smart-case
-            \ --line-number
-            \ --no-heading
-            \ --color=always '.shellescape(expand("<cword>")), 1,
-            \ fzf#vim#with_preview(),
-            \ <bang>0)
-            \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-            \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-            \   <bang>0)
-
-"*****************************************************************************
 " Tab Settings
 "*****************************************************************************
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-
-set noswapfile
-
 nnoremap K i<CR><Esc>
-
-highlight clear LineNr
-highlight clear SignColumn
-
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-
-highlight NonText guifg=bg
+set t_Co=256
