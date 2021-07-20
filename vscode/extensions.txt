@@ -1,9 +1,0 @@
-code --install-extension CoenraadS.bracket-pair-colorizer
-code --install-extension jolaleye.horizon-theme-vscode
-code --install-extension kamikillerto.vscode-colorize
-code --install-extension ms-vscode.cpptools
-code --install-extension ms-vscode.Go
-code --install-extension Shan.code-settings-sync
-code --install-extension shaneyu.beyond-the-horizon-theme-vscode
-code --install-extension vscode-icons-team.vscode-icons
-code --install-extension vscodevim.vim
