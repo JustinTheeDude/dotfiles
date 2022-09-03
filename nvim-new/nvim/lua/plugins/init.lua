@@ -1,0 +1,7 @@
+require("plugins.treesitter")
+require("plugins.lualine")
+require("plugins.mason")
+require("plugins.lspconfig")
+require("plugins.nvim-cmp")
+require("plugins.telescope")
+require("plugins.indentline")
