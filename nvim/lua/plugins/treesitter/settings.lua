@@ -1,20 +1,22 @@
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup {
   highlight = {
     enable = true,
     disable = {},
   },
   indent = {
     enable = true,
+    disable = {},
   },
   ensure_installed = {
+    "php",
     "json",
-    "html",
     "css",
-    "scss",
-    "javascript",
-    "go",
-    "graphql",
-    "python",
-    "typescript"
+    "html",
+    "lua",
+    "vue",
+    "javascript"
+  },
+  autotag = {
+    enable = true,
   },
 }

@@ -1,11 +1,4 @@
--- ./lua/utils.lua
-require('utils')
-
--- ./lua/general/init.lua
-require('general')
-
---- ./lua/install-plugins.lua
-require('install-plugins')
-
--- ./lua/plugins/init.lua
-require('plugins')
+require("base")
+require("maps")
+require("plugins")
+require("install-plugins")

@@ -1,12 +1,13 @@
 local actions = require('telescope.actions')
--- Global remapping
-------------------------------
-require('telescope').setup{
+
+require("telescope").setup {
   defaults = {
     mappings = {
       n = {
         ["q"] = actions.close
       },
     },
-  }
+  },
+  extensions = {}
 }
+require("telescope").load_extension "file_browser"

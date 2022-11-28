@@ -1,50 +1,50 @@
---[[ Paq: Auto Install ]]--
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/paqs/start/paq-nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-        vim.fn.execute [[ git clone --depth=1 https://github.com/savq/paq-nvim.git {install_path} ]]
-end
+vim.cmd [[packadd packer.nvim]]
 
---[[ Paq: Plugins ]]--
-require("paq") {
-        -- Package Manager --
-        {'savq/paq-nvim'};
+return require("packer").startup(function(use)
+  -- Packer
+  use 'wbthomason/packer.nvim'
 
-        -- Status lines --
-        {'hoob3rt/lualine.nvim'};
-        {'kyazdani42/nvim-web-devicons'};
+  -- Treeshitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
 
-        -- Github --
-        {'ruanyl/vim-gh-line'};
+  use "nvim-telescope/telescope-file-browser.nvim"
 
-        -- Language Server Packs --
-        {'neovim/nvim-lspconfig'};
-        {'williamboman/nvim-lsp-installer'};
-        {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'};
-        {'glepnir/lspsaga.nvim'};
-        -- {'sheerun/vim-polyglot'};
+  -- Telescope
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 
-        -- Autocomplete --
-        {'hrsh7th/nvim-cmp'};
-        {'hrsh7th/cmp-buffer'};
-        {'hrsh7th/cmp-path'};
-        {'hrsh7th/cmp-nvm-lua'};
-        {'hrsh7th/cmp-nvim-lsp'};
-        {'L3MON4D3/LuaSnip'};
-        {'saadparwaiz1/cmp_luasnip'};
+  -- Lualine
+  use 'nvim-lualine/lualine.nvim'
 
-        -- Telescope --
-        {'nvim-lua/popup.nvim'};
-        {'nvim-lua/plenary.nvim'};
-        {'nvim-telescope/telescope.nvim'};
-        {'nvim-telescope/telescope-fzy-native.nvim'};
+  -- Themes
+  use 'folke/tokyonight.nvim'
 
-        -- Themes --
-        {'dracula/vim', as ='dracula'};
+  -- LSP
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+		'neovim/nvim-lspconfig',
+		'glepnir/lspsaga.nvim',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/nvim-cmp',
+    'L3MON4D3/LuaSnip',
+    'onsails/lspkind.nvim'
+  }
 
-        -- Utilities --
-        {'windwp/nvim-autopairs'};
-        {'ap/vim-css-color'};
-        {'simeji/winresizer'};
-        {'tweekmonster/django-plus.vim'};
-        {'sheerun/vim-polyglot'};
-}
+	--Blankline
+	use "lukas-reineke/indent-blankline.nvim"
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
+
+	use { 'jose-elias-alvarez/null-ls.nvim'}
+end)
